@@ -1,3 +1,7 @@
+Build an application that allows users to input the item they wish
+to purchase and the app will search multiple websites for deals,
+consolidating them for user
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
