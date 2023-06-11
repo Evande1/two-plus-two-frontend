@@ -1,33 +1,4 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -43,37 +14,27 @@ header {
   position: sticky;
   z-index: 30;
   top: 0;
+  height: auto;
 }
 nav {
   display: flex;
-  padding: 16px;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-color: #f1f1f1;
 }
-.nav__menu-bar {
-  display: flex;
-  flex-direction: column;
-  row-gap: 6px;
-  cursor: pointer;
-}
-.nav__menu-bar div {
-  width: 40px;
-  height: 4px;
-  background-color: black;
-  border-radius: 2px;
-}
+
 .nav__menu-list {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 60px;
+  top: 25px;
   width: 288px;
-  row-gap: 24px;
-  right: -288px;
+  row-gap: 10px;
+
   padding: 24px 16px;
   transition: all 0.2s;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh- 100px);
   background-color: #f1f1f1;
 }
 .nav__menu-list.active {
@@ -96,9 +57,15 @@ nav {
   align-items: center;
 }
 @media screen and (min-width: 768px) {
-  .nav__menu-bar {
-    display: none;
+  nav {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
   }
+
   .nav__menu-list {
     position: unset;
     flex-direction: row;
