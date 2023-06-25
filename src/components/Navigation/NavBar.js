@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
 
-const NavBar = () => {
+const PAGES_NOT_LOGGED_IN = [
+  { text: "Login", href: "pages/login" },
+]
+
+const NavBar = ({isLoggedIn}) => {
   const PAGES = [
     { text: "Favourites", href: "pages/favourites" },
     { text: "Search", href: "pages/search" },
     { text: "Home", href: "/" },
+    { text: "Logout", href: "pages/logout"},
   ];
 
   const [activePageId, setActivePageId] = useState(-1);
@@ -18,7 +23,7 @@ const NavBar = () => {
           <h1 className="logo">DI$COUNT FINDER</h1>
         </Link>
         <div className={`nav__menu-list`}>
-          {PAGES.map((pg, id) => (
+          {(isLoggedIn ? PAGES : PAGES_NOT_LOGGED_IN).map((pg, id) => (
             <div
               onClick={() => {
                 setActivePageId(id);
