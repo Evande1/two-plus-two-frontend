@@ -1,7 +1,12 @@
 import React from "react";
 
 const LoginPage = () => {
-  return <div>Login Page</div>;
+  return <div>
+    <form>
+      <input type='email' placeholder = 'john@email.com'/>
+      <input type='password' placeholder = '******'/>
+    </form>
+  </div>;
 };
 
 export default LoginPage;
