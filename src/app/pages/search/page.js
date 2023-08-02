@@ -1,7 +1,68 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import axios from 'axios';
 
 const Search = () => {
-  return <div>Search Page</div>;
+  // add button 
+  // add display
+  const [coupon, setCoupon] = useState([]);
+  useEffect(() => {
+  },[coupon]);
+
+  const handleKFCButton = async () => {
+    // might need to use ...
+    // future hide the endpoint with nextJS environment variables
+    
+    try {
+      const { data } = await axios.get(`http://localhost:3000/api/coupon/kfc`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      setCoupon(data);
+      console.log(JSON.stringify(data));
+      console.log(coupon);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
+  // const handleKFC;
+  return <div>
+    <h1>Search Page</h1>
+    <button onClick={handleKFCButton}>KFC</button>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell>Link</TableCell>
+            <TableCell>Type</TableCell>
+            <TableCell>Expiry</TableCell>
+          </TableRow>
+        </TableHead>
+        {coupon.map((row) => {
+          return(
+            <TableRow>
+          <TableCell>{row.title}</TableCell>
+          <TableCell>{row.url}</TableCell>
+          <TableCell>{row.type}</TableCell>
+          <TableCell>{row.expiry}</TableCell>
+          </TableRow> 
+          ); 
+        })}
+        </Table>
+      </TableContainer>
+  </div>;
 };
 
 export default Search;
