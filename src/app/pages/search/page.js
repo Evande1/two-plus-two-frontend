@@ -34,12 +34,32 @@ const Search = () => {
       console.log(err);
     }
   };
+
+  const handleBKButton = async () => {
+    // might need to use ...
+    // future hide the endpoint with nextJS environment variables
+    
+    try {
+      const { data } = await axios.get(`http://localhost:3000/api/coupon/bk`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      setCoupon(data);
+      console.log(JSON.stringify(data));
+      console.log(coupon);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
 
   // const handleKFC;
   return <div>
     <h1>Search Page</h1>
     <button onClick={handleKFCButton}>KFC</button>
+    <button onClick={handleBKButton}>BK</button>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
         <TableHead>
