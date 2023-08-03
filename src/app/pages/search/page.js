@@ -53,6 +53,28 @@ const Search = () => {
       console.log(err);
     }
   };
+
+  const addToFavourites = async (row) => {
+    // might need to use ...
+    // future hide the endpoint with nextJS environment variables
+    
+    try {
+      const { data } = await axios.post(`http://localhost:3000/api/coupon/addfavourites`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        title: row.title,
+        type: row.type,
+        url: row.url,
+        expiry: row.expiry,
+      });
+
+      console.log(JSON.stringify(data))
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
 
   // const handleKFC;
@@ -68,6 +90,7 @@ const Search = () => {
             <TableCell>Link</TableCell>
             <TableCell>Type</TableCell>
             <TableCell>Expiry</TableCell>
+            <TableCell>Favourite</TableCell>
           </TableRow>
         </TableHead>
         {coupon.map((row) => {
@@ -77,6 +100,7 @@ const Search = () => {
           <TableCell>{row.url}</TableCell>
           <TableCell>{row.type}</TableCell>
           <TableCell>{row.expiry}</TableCell>
+          <TableCell><button onClick={() => addToFavourites(row)}>Add to Favourites</button></TableCell>
           </TableRow> 
           ); 
         })}
