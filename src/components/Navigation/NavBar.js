@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
+import "src/app/global.css";
 
 const NavBar = () => {
   const PAGES = [
