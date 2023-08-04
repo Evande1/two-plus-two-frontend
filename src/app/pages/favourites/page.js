@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Link from "@mui/material/Link";
 import axios from 'axios';
 
 const Favourites = () => {
@@ -73,9 +74,9 @@ const Favourites = () => {
       </TableHead>
       {favourites.map((row) => {
         return(
-          <TableRow>
+          <TableRow hover={true}>
         <TableCell>{row.title}</TableCell>
-        <TableCell><a href={row.url} target="_blank" rel="noopener noreferrer" className="link">{row.url}</a></TableCell>
+        <TableCell><Link href={row.url} target="_blank" rel="noopener noreferrer" underline="hover">{row.url}</Link></TableCell>
         <TableCell>{row.type}</TableCell>
         <TableCell>{row.expiry}</TableCell>
         <TableCell><Button variant="contained" onClick={() => removeFavourites(row)}>Remove</Button></TableCell>

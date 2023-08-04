@@ -112,8 +112,7 @@ const Search = () => {
     <button onClick={handleKFCButton}>KFC</button>
     <button onClick={handleBKButton}>BK</button>
     <button onClick={scoopButtonHandler}>SCOOP</button>
-    {!isLoading && <CouponList coupons={coupon} addToFavourites={addToFavourites}/>}
-    {isLoading && <Loader/>}
+    <CouponList coupons={coupon} addToFavourites={addToFavourites} isLoading={isLoading}/>
   </div>;
 };
 
