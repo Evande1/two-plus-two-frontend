@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import CouponList from "./CouponList";
 
 const Search = () => {
   // add button 
@@ -107,6 +108,7 @@ const Search = () => {
         })}
         </Table>
       </TableContainer>
+      <CouponList/>
   </div>;
 };
 
