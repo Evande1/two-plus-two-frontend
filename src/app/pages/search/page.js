@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,7 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import axios from 'axios';
+import CouponList from "./CouponList";
+import Loader from "./Loader";
 
 const Search = () => {
   // add button 
@@ -16,11 +19,14 @@ const Search = () => {
   useEffect(() => {
   },[coupon]);
 
+  const[isLoading, setIsLoading] = useState(false);
+
   const handleKFCButton = async () => {
     // might need to use ...
     // future hide the endpoint with nextJS environment variables
     
     try {
+      setIsLoading(true);
       const { data } = await axios.get(`http://localhost:3000/api/coupon/kfc`, {
         headers: {
           'Content-Type': 'application/json',
@@ -28,6 +34,7 @@ const Search = () => {
         },
       });
       setCoupon(data);
+      setIsLoading(false);
       console.log(JSON.stringify(data));
       console.log(coupon);
     } catch (err) {
@@ -38,7 +45,7 @@ const Search = () => {
   const handleBKButton = async () => {
     // might need to use ...
     // future hide the endpoint with nextJS environment variables
-    
+    setIsLoading(true);
     try {
       const { data } = await axios.get(`http://localhost:3000/api/coupon/bk`, {
         headers: {
@@ -47,12 +54,34 @@ const Search = () => {
         },
       });
       setCoupon(data);
+      setIsLoading(false);
       console.log(JSON.stringify(data));
       console.log(coupon);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const scoopButtonHandler = async () => {
+		try {
+			setIsLoading(true);
+			const { data } = await axios.get(
+				`http://localhost:3000/api/coupon/scp`,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			);
+
+			setCoupon(data);
+			setIsLoading(false);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 
   const addToFavourites = async (row) => {
     // might need to use ...
@@ -82,30 +111,8 @@ const Search = () => {
     <h1>Search Page</h1>
     <button onClick={handleKFCButton}>KFC</button>
     <button onClick={handleBKButton}>BK</button>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Link</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Expiry</TableCell>
-            <TableCell>Favourite</TableCell>
-          </TableRow>
-        </TableHead>
-        {coupon.map((row) => {
-          return(
-            <TableRow>
-          <TableCell>{row.title}</TableCell>
-          <TableCell>{row.url}</TableCell>
-          <TableCell>{row.type}</TableCell>
-          <TableCell>{row.expiry}</TableCell>
-          <TableCell><button onClick={() => addToFavourites(row)}>Add to Favourites</button></TableCell>
-          </TableRow> 
-          ); 
-        })}
-        </Table>
-      </TableContainer>
+    <button onClick={scoopButtonHandler}>SCOOP</button>
+    <CouponList coupons={coupon} addToFavourites={addToFavourites} isLoading={isLoading}/>
   </div>;
 };
 

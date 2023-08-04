@@ -12,6 +12,7 @@ const NavBar = () => {
   ];
 
   const [activePageId, setActivePageId] = useState(-1);
+
   return (
     <header>
       <nav className={`nav`}>
