@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import axios from 'axios';
 
 const Search = () => {
@@ -90,17 +91,17 @@ const Search = () => {
             <TableCell>Link</TableCell>
             <TableCell>Type</TableCell>
             <TableCell>Expiry</TableCell>
-            <TableCell>Favourite</TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         {coupon.map((row) => {
           return(
             <TableRow>
           <TableCell>{row.title}</TableCell>
-          <TableCell>{row.url}</TableCell>
+          <TableCell><a href={row.url} target="_blank" rel="noopener noreferrer" className="link">{row.url}</a></TableCell>
           <TableCell>{row.type}</TableCell>
           <TableCell>{row.expiry}</TableCell>
-          <TableCell><button onClick={() => addToFavourites(row)}>Add to Favourites</button></TableCell>
+          <TableCell><Button variant="contained" onClick={() => addToFavourites(row)}>Add to Favourites</Button></TableCell>
           </TableRow> 
           ); 
         })}
